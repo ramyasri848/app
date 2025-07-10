@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>YUMLY</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 2;
+    }
+
+    .left-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .button {
+      padding: 10px 16px;
+      background-color: red;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .button:hover {
+      background-color: tomato;
+    }
+
+    .half-page {
+      height: 50vh;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .half-page img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .top-text {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+      z-index: 1;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .search-box {
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+
+    .search-box form {
+      display: flex;
+    }
+
+    .search-box input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      border-radius: 6px 0 0 6px;
+      border: 2px solid red;
+      outline: none;
+    }
+
+    .search-box button {
+      padding: 10px 20px;
+      border: none;
+      background-color: red;
+      color: white;
+      font-weight: bold;
+      border-radius: 0 6px 6px 0;
+      cursor: pointer;
+    }
+
+    .food-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px 20px 20px;
+      background-color: #f3f3f3;
+    }
+
+    .food-item {
+      margin: 15px;
+      text-align: center;
+    }
+
+    .food-item img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .food-item img:hover {
+      transform: scale(1.1);
+    }
+
+    .food-item-name {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    /* Bottom button section */
+    .bottom-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px;
+      background-color: #f3f3f3;
+    }
+
+    .bottom-buttons a {
+      padding: 12px 20px;
+      background-color: red;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 16px;
+      flex: 1 1 150px;
+      text-align: center;
+    }
+
+    .bottom-buttons a:hover {
+      background-color: tomato;
+    }
+
+    @media (max-width: 500px) {
+      .search-box input[type="text"] {
+        width: 200px;
+      }
+
+      .top-text {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="left-buttons">
+      <a href="address.html" class="button">📍 Address</a>
+    </div>
+    <div class="right-buttons">
+      <a href="profile.html" class="button">👤 Profile</a>
+      <a href="login.html" class="button">🔐 Login</a>
+    </div>
+  </header>
+
+  <div class="half-page">
+    <img src="images/toppage.jpeg" alt="Top Banner">
+    <div class="top-text">From Mandi to Your Doorstep — Hot, Fresh & Fast!</div>
+    <div class="search-box">
+      <form onsubmit="event.preventDefault();">
+        <input type="text" id="searchInput" placeholder="Search for dishes like Biryani, Dosa...">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="food-section" id="foodSection"></div>
+
+  <!-- 👇 Four bottom buttons after food items -->
+  <div class="bottom-buttons">
+    <a href="orders.html">📦 Previous Orders</a>
+    <a href="favourites.html">❤️ Favourite</a>
+    <a href="cart.html">🛒 Cart</a>
+    <a href="track.html">📍 Track My Order</a>
+  </div>
+
+  <script>
+    const foodItems = [
+      'Chicken Mandi', 'Hyderabadi Biryani', 'Butter Chicken', 'Paneer Tikka', 'Fish Curry',
+      'Idli Sambar', 'Aloo Paratha', 'Palak Paneer', 'Chole Bhature', 'Veg Pulao',
+      'Mutton Korma', 'Chicken Chettinad', 'Masala Dosa', 'Gobi Manchurian', 'Rajma Chawal',
+      'Tandoori Chicken', 'Pani Puri', 'Dal Makhani', 'Chicken 65', 'Rogan Josh'
+    ];
+
+    const fileNames = [
+      'chickenmandi', 'hyderabadibiryani', 'butterchicken', 'paneertikka', 'fishcurry',
+      'idlisambar', 'alooparatha', 'palakpaneer', 'cholebhature', 'vegpulao',
+      'muttonkorma', 'chickenchettinad', 'masaladosa', 'gobimanchurian', 'rajmachawal',
+      'tandoorichicken', 'panipuri', 'dalmakhani', 'chicken65', 'roganjosh'
+    ];
+
+    const imagePaths = [
+      'ChickenMandi.avif', 'HyderabadiBiryani.avif', 'ButterChicken.jpg', 'PaneerTikka.webp', 'FishCurry.jpg',
+      'IdliSambar.webp', 'AlooParatha.webp', 'PalakPaneer.webp', 'CholeBhature.webp', 'VegPulao.webp',
+      'MuttonKorma.webp', 'ChickenChettinad.webp', 'MasalaDosa.avif', 'GobiManchurian.webp', 'RajmaChawal.avif',
+      'TandooriChicken.webp', 'PaniPuri.webp', 'DalMakhani.webp', 'Chicken65.webp', 'RoganJosh.webp'
+    ];
+
+    const container = document.getElementById('foodSection');
+    const allIndexes = [...Array(foodItems.length).keys()];
+
+    function renderItems(indexes) {
+      container.innerHTML = '';
+      if (indexes.length === 0) {
+        container.innerHTML = '<div style="margin-top:20px; font-size:20px;">No matching food items found.</div>';
+        return;
+      }
+      indexes.forEach(i => {
+        const div = document.createElement('div');
+        div.className = 'food-item';
+        div.setAttribute('data-name', foodItems[i]);
+        div.innerHTML = `
+          <a href="fooditems/${fileNames[i]}.html">
+            <img src="images/${imagePaths[i]}" alt="${foodItems[i]}">
+          </a>
+          <div class="food-item-name">${foodItems[i]}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function searchFood() {
+      const input = document.getElementById('searchInput').value.trim().toLowerCase();
+      const matchedIndexes = allIndexes.filter(i => foodItems[i].toLowerCase().includes(input));
+      renderItems(matchedIndexes);
+    }
+
+    document.getElementById('searchInput').addEventListener('input', searchFood);
+    renderItems(allIndexes); // initial load
+  </script>
+</body>
+</html>

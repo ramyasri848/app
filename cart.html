@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Cart</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+    h2 {
+      color: red;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Items in Your Cart</h2>
+  <ul id="cartList"></ul>
+
+  <script>
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartList = document.getElementById('cartList');
+
+    if (cartItems.length === 0) {
+      cartList.innerHTML = "<li>Your cart is empty.</li>";
+    } else {
+      cartItems.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        cartList.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>

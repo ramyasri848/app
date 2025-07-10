@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Previous Orders</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+    h2 {
+      color: red;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Your Previous Orders</h2>
+  <ul id="orderList"></ul>
+
+  <script>
+    const orderItems = JSON.parse(localStorage.getItem('orders')) || [];
+    const orderList = document.getElementById('orderList');
+
+    if (orderItems.length === 0) {
+      orderList.innerHTML = "<li>No previous orders.</li>";
+    } else {
+      orderItems.forEach(order => {
+        const li = document.createElement('li');
+        li.textContent = `${order.name} — Ordered on ${order.date}`;
+        orderList.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>

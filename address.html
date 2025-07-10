@@ -1,0 +1,68 @@
+<!-- address.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>YUMLY</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f8f8f8;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    form {
+      max-width: 400px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #e67e22;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #cf711f;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Enter Your Delivery Address</h2>
+  <form action="#">
+    <label>Full Name</label>
+    <input type="text" placeholder="Your Name">
+
+    <label>Mobile Number</label>
+    <input type="tel" placeholder="Phone Number">
+
+    <label>Address</label>
+    <textarea rows="4" placeholder="Street, Area, City, etc."></textarea>
+
+    <label>Pin Code</label>
+    <input type="text" placeholder="123456">
+
+    <button type="submit">Save Address</button>
+  </form>
+
+</body>
+</html>

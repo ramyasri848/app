@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Favourites</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+    h2 {
+      color: red;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Your Favourite Dishes</h2>
+  <ul id="favList"></ul>
+
+  <script>
+    const favItems = JSON.parse(localStorage.getItem('favourites')) || [];
+    const favList = document.getElementById('favList');
+
+    if (favItems.length === 0) {
+      favList.innerHTML = "<li>No favourites yet.</li>";
+    } else {
+      favItems.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        favList.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
